@@ -1,3 +1,3 @@
 module.exports = app => {
-    require('./taskRoutes.js')(app)
+    require('./characterRoutes.js')(app)
 }

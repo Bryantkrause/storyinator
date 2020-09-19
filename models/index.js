@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose')
 
 module.exports = {
-    Task: require('./Task.js')(model, Schema)
+    Task: require('./Character.js')(model, Schema)
 }
