@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios'
-import TaskContext from '../../utils/TaskContext'
+import CharacterContext from '../../utils/CharacterContext'
 import TaskForm from '../../components/TaskForm'
-import TaskDisplay from '../../components/TaskDisplay'
+import CharacterDisplay from '../../components/CharacterDisplay'
 
-class Tasks extends React.Component {
+class Characters extends React.Component {
   state = {
-    task: '',
+    character: '',
     status: '',
-    tasks: [],
+    characters: [],
     inputChange: e => {
       this.setState({ [e.target.name]: e.target.value })
     },
-    taskSubmit: e => {
+    characterSubmit: e => {
       e.preventDefault()
       console.log(e)
       //this.setState({ [e.target.name]: e.target.value })
@@ -26,7 +26,7 @@ class Tasks extends React.Component {
           this.setState({ tasks: arr, task: '', status: ''  })
         })
     },
-    deleteTask: _id => {
+    deleteCharacter: _id => {
       console.log(_id)
       axios.delete(`/task/${_id}`,)
       .then( r => {
@@ -48,8 +48,8 @@ class Tasks extends React.Component {
   }
 
   componentDidMount() { // When the page loads grab the data from the database and update the tasks array
-    axios.get('/tasks')
-      .then( ({data}) => this.setState({ tasks: data }))
+    axios.get('/characters')
+      .then( ({data}) => this.setState({ characters: data }))
   }
 
   render () {
@@ -62,4 +62,4 @@ class Tasks extends React.Component {
   }
 }
 
-export default Tasks
+export default Characters

@@ -1,33 +1,33 @@
 import React from 'react'
-import TaskContext from '../../utils/TaskContext'
+import CharacterContext from '../../utils/CharacterContext'
 import { Table } from 'reactstrap'
 
-const TaskDisplay = () => {
+const CharacterkDisplay = () => {
 
   return (
-    <TaskContext.Consumer>
+    <CharacterContext.Consumer>
       {
-        ({tasks, deleteTask}) => (
+        ({characters, deleteCharacter}) => (
           <>
             <Table dark>
               <thead>
                 <tr>
                   <th><h4>#</h4></th>
-                  <th><h4>Task</h4></th>
-                  <th><h4>Status:</h4></th>
+                  <th><h4>character</h4></th>
+                  <th><h4>name:</h4></th>
                   <th><h4>Created At:</h4></th>
                   <th><h4>Delete</h4></th>
                 </tr>
               </thead>
               <tbody>
                   {
-                    tasks.map( ( { _id, task, status, createdAt}, i) =>
+                    characters.map( ( { _id, character, name, createdAt}, i) =>
                       <tr key={_id}>
                         <td>{i+1}</td>
-                        <td>{task}</td>
-                        <td>{status}</td>
+                        <td>{character}</td>
+                        <td>{name}</td>
                         <td>{createdAt}</td>
-                        <td><button onClick={() => deleteTask(_id)}>Delete </button></td>
+                        <td><button onClick={() => deleteCharacter(_id)}>Delete </button></td>
                       </tr>
                     )
                   }
@@ -36,8 +36,8 @@ const TaskDisplay = () => {
           </>
         )
       }
-    </TaskContext.Consumer>
+    </CharacterContext.Consumer>
   )
 }
 
-export default TaskDisplay
+export default CharacterkDisplay
