@@ -4,7 +4,7 @@ module.exports = app => {
 
   // GET all characters
   app.get('/characters', (req, res) => {
-    console.log('getting them characters')
+    console.log('getting them characters, get all route hit')
     Character.find()
       // .populate('user')
       .then(characters => res.json(characters))

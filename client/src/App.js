@@ -4,8 +4,8 @@ BrowserRouter as Router,
 Switch,
 Route
 } from 'react-router-dom'
-import Tasks from './pages/Tasks'
-import Page2 from './pages/page2'
+import Characters from './pages/Characters'
+
 
 const App = () =>{
   return (
@@ -13,12 +13,10 @@ const App = () =>{
       <Router>
         <Switch>
         <Route exact path="/">
-          <Tasks/>
+          <Characters/>
         </Route>
 
-        <Route path="/page2">
-          <Page2/>
-        </Route>
+
 
         </Switch>
       </Router>
@@ -27,3 +25,4 @@ const App = () =>{
 }
 
 export default App;
+
