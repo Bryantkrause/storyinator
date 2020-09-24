@@ -9,6 +9,14 @@ class Characters extends React.Component {
     character: '',
     level: '',
     name: '',
+    proficiency: '',
+    speed: '',
+    strength: '',
+    dexterity: '',
+    constitution: '',
+    intelligence: '',
+    wisdom: '',
+    charisma: '',
     characters: [],
     inputChange: e => {
       this.setState({ [e.target.name]: e.target.value })
@@ -20,7 +28,15 @@ class Characters extends React.Component {
       axios.post(`/character`, {
         character: this.state.character,
         level: this.state.level,
-        name: this.state.name
+        name: this.state.name,
+        proficiency: this.state.proficiency,
+        speed: this.state.speed,
+        strength: this.state.strength,
+        dexterity: this.state.dexterity,
+        constitution: this.state.constitution,
+        intelligence: this.state.intelligence,
+        wisdom: this.state.wisdom,
+        charisma: this.state.charisma,
      })
         .then( ({data}) => {
           let arr = JSON.parse(JSON.stringify(this.state.characters))
