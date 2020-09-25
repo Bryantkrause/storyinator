@@ -5,7 +5,7 @@ Switch,
 Route
 } from 'react-router-dom'
 import Characters from './pages/Characters'
-
+import Selection from './pages/Selection'
 
 const App = () =>{
   return (
@@ -14,6 +14,10 @@ const App = () =>{
         <Switch>
         <Route exact path="/">
           <Characters/>
+        </Route>
+
+        <Route exact path="/Selection">
+          <Selection/>
         </Route>
 
 
