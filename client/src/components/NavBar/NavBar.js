@@ -1,118 +1,95 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-// Material-UI Components
-import { withStyles } from '@material-ui/core/styles'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-// Material-UI Icons
-import MenuIcon from '@material-ui/icons/Menu'
-import PersonIcon from '@material-ui/icons/Person'
-import GroupIcon from '@material-ui/icons/Group'
-import AssignmentIcon from '@material-ui/icons/Assignment'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`nav-tabpanel-${index}`}
+      aria-labelledby={`nav-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-import Context from '../../../utils/Context'
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
 
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})(props => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-        }}
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-        }}
-        {...props}
+function a11yProps(index) {
+  return {
+    id: `nav-tab-${index}`,
+    'aria-controls': `nav-tabpanel-${index}`,
+  };
+}
+
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={(event) => {
+        event.preventDefault();
+      }}
+      {...props}
     />
-))
+  );
+}
 
-const StyledMenuItem = withStyles(theme => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem)
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
-export default function HamMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null)
+export default function NavTabs() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
 
-    const { logout } = React.useContext(Context)
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-    const handleClick = event => {
-        setAnchorEl(event.currentTarget)
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
-
-    return (
-        <div>
-            <MenuIcon
-                fontSize="large"
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                // variant="contained"
-                // color="primary"
-                onClick={handleClick}
-            >
-                Open Menu
-      </MenuIcon>
-            <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={'/user'}>
-                    <StyledMenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <PersonIcon fontSize="medium" />
-                        </ListItemIcon>
-                        <ListItemText primary="Profile" />
-                    </StyledMenuItem>
-                </Link>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={'/team'}>
-                    <StyledMenuItem onClick={handleClose}> 
-                        <ListItemIcon>
-                            <GroupIcon fontSize="medium" />
-                        </ListItemIcon>
-                        <ListItemText primary="Team" />
-                    </StyledMenuItem>
-                </Link>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={'/boards'}>
-                    <StyledMenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <AssignmentIcon fontSize="medium" />
-                        </ListItemIcon>
-                        <ListItemText primary="Boards" />
-                    </StyledMenuItem>
-                </Link>
-                <Link style={{ textDecoration: 'none', color: 'white' }} to={'/'}>
-                    <StyledMenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <ExitToAppIcon onClick = {logout} fontSize="medium" />
-                        </ListItemIcon>
-                        <ListItemText primary="Logout" />
-                    </StyledMenuItem>
-                </Link>
-            </StyledMenu>
-        </div>
-    )
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs
+          variant="fullWidth"
+          value={value}
+          onChange={handleChange}
+          aria-label="nav tabs example"
+        >
+          <LinkTab label="Home" href="/" {...a11yProps(0)} />
+          <LinkTab label="Character Selection" href="/Selection" {...a11yProps(1)} />
+          <LinkTab label="Page Three" href="/spam" {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        Page One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Page Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Page Three
+      </TabPanel>
+    </div>
+  );
 }

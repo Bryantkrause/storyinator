@@ -3,6 +3,7 @@ import axios from 'axios'
 import CharacterContext from '../../utils/CharacterContext'
 import CharacterForm from '../../components/CharacterForm'
 import CharacterDisplay from '../../components/CharacterDisplay'
+import NavTabs from '../../components/NavBar'
 
 class Characters extends React.Component {
   state = {
@@ -73,6 +74,7 @@ class Characters extends React.Component {
   render () {
     return (
       <CharacterContext.Provider value={this.state}>
+          <NavTabs/>
           <CharacterForm />
           <CharacterDisplay />
       </CharacterContext.Provider>

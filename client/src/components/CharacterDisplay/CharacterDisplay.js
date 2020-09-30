@@ -42,7 +42,6 @@ const CharacterDisplay = () => {
                         <td>{wisdom}</td>
                         <td>{charisma}</td>
                         <td><button onClick={() => deleteCharacter(_id)}>Delete </button></td>
-                        <td><button onClick={() => goToCharacter(_id)}>Delete </button></td>
                       </tr>
                     )
                   }
