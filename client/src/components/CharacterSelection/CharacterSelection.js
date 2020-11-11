@@ -7,7 +7,7 @@ const CharacterSelection = () => {
   return (
     <CharacterContext.Consumer>
       {
-        ({characters, deleteCharacter, goToCharacter}) => (
+        ({characters, deleteCharacter}) => (
           <>
             <Table dark>
               <thead>

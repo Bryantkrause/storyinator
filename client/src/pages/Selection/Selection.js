@@ -2,10 +2,12 @@ import React from 'react'
 import axios from 'axios'
 import CharacterContext from '../../utils/CharacterContext'
 import CharacterSelection from '../../components/CharacterSelection'
+import NavTabs from '../../components/NavBar'
 
 class Selection extends React.Component {
     state = {
       character: '',
+      characters: [],
       level: '',
       inputChange: e => {
         this.setState({ [e.target.name]: e.target.value })
@@ -37,6 +39,7 @@ class Selection extends React.Component {
       render () {
         return (
           <CharacterContext.Provider value={this.state}>
+            <NavTabs/>
               <CharacterSelection />
           </CharacterContext.Provider>
         )
